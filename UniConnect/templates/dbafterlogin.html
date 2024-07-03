@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniConnect Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        body {
+            background: #121212; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .uni {
+            color: #fff200;
+            animation: animate 1s ease-in-out infinite alternate;
+        }
+        @keyframes animate{
+            from{
+                text-shadow: 0 0 20px #fff200;
+            }
+            to{
+                text-shadow: 0 0 30px  #fff200, 0 0 10px #FF8C00;
+            }
+        }
+
+        .hero{
+            font-size: 8em;
+        }
+        .curve::after{
+            content:'';
+            border-top-left-radius: 50% 100%;
+            border-top-right-radius: 50% 100%;
+            position: absolute;
+            bottom: 0;
+            height: 85%;
+            width: 100%;
+            background-color: #0f0f10;
+            z-index: -1;
+        }
+        .btn {
+            border: none;
+            width: 15em;
+            height: 4em;
+            border-radius: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            background: #1C1A1C;
+            cursor: pointer;
+            transition: all 450ms ease-in-out;
+        }
+        
+        .sparkle {
+            fill: #AAAAAA;
+            transition: all 800ms ease;
+        }
+        
+        .text {
+            font-weight: 600;
+            color: #AAAAAA;
+            font-size: medium;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(0deg, #FFD700, #FFA500); /* Yellow and orange gradient */
+            box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+                        inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+                        0px 0px 0px 4px rgba(255, 255, 255, 0.2),
+                        0px 0px 180px 0px #FF8C00; /* Darker orange glow */
+            transform: translateY(-2px);
+        }
+        
+        
+        .btn:hover .text {
+            color: white;
+        }
+        
+        .btn:hover .sparkle {
+            fill: white;
+            transform: scale(1.2);
+        } 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+          }
+          
+          .button {
+            cursor: pointer;
+            text-decoration: none;
+            color: #ffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #2d2e32;
+            border: 2px solid #2d2e32;
+            transition: all 0.45s;
+          }
+          
+          .button:hover {
+            transform: rotate(360deg);
+            transform-origin: center center;
+            background-color: #ffff;
+            color: blue;
+          }
+          
+          .button:hover .btn-svg {
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg)
+              brightness(103%) contrast(103%);
+          }
+          
+          .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+        .navbar {
+            padding: 1rem 2rem;
+            background: rgba(30, 30, 30, 0.9); /* Darker background with slight opacity */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0 0 10px 10px; /* Rounded corners */
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+  
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #ff4500;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            text-decoration: none; /* Remove default underline */
+            color: inherit; /* Inherit text color */
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .profile-avatar:hover {
+            opacity: 0.8; /* Optional: Reduce opacity on hover for better visual feedback */
+        }
+
+        .form-control {
+            border-radius: 10px;
+            background-color: #1e1e1e; /* Dark background for input */
+            color: #ffffff; /* Light text color */
+            border: 1px solid #333333; /* Dark border */
+        }
+
+        .form-control::placeholder {
+            color: #888888; /* Light placeholder text */
+        }
+
+        .btn-primary {
+            background-color: blue;
+            border: none;
+            border-radius: 10px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .btn-outline-light {
+            border-radius: 10px;
+            padding: 0.5rem 1.5rem;
+            border-color: #ffffff; /* Light border color */
+            color: #ffffff; /* Light text color */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            margin-bottom: 30px;
+            background-color: #1f1f1f; /* Dark card background */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+        }
+
+        .card-header {
+            border-bottom: none;
+            background-color: #2c2c2c; /* Slightly lighter background for card header */
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .create-post .card-header,
+        .subreddits .card-header {
+            background-color: light-blue; /* Highlight color */
+        }
+
+        .create-post form input,
+        .create-post form select {
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #333333; /* Darker border */
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .create-post form button {
+            padding: 15px;
+            background-color: #ff4500;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .subreddits ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .subreddits ul li {
+            margin-bottom: 15px;
+        }
+
+        .subreddits ul li a {
+            text-decoration: none;
+            color: #ff4500; /* Highlight color */
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .subreddits ul li a:hover {
+            color: #ff7300; /* Darker highlight on hover */
+        }
+
+        .post-content h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffffff; /* Light text color */
+        }
+
+        .post-content p {
+            margin: 10px 0;
+            color: #bbbbbb; /* Light gray text color */
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .tweet-card {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid #333333; /* Dark border */
+            border-radius: 15px;
+            background-color: #2c2c2c; /* Dark background */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            cursor: pointer;
+        }
+
+        .tweet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+        }
+
+        .tweet-avatar {
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #1da1f2; /* Tweet avatar background */
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .tweet-content {
+            flex: 1;
+        }
+
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .tweet-username {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #ffffff; /* Light text color */
+        }
+
+        .tweet-handle {
+            color: #1da1f2; /* Link color */
+        }
+
+        .tweet-timestamp {
+            color: #888888; /* Light gray text color */
+            margin-left: 5px;
+        }
+
+        .tweet-body {
+            color: #ffffff; /* Light text color */
+        }
+
+        .tweet-body .tweet-tag {
+            color: #1da1f2; /* Tag color */
+        }
+
+        .tweet-title {
+            font-weight: bold;
+            color: #ffffff; /* Light text color */
+            margin-bottom: 5px;
+        }
+
+        .tweet-card img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .comment-icon {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .notification-icon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+
+        .dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            background-color: #2c2c2c; /* Dark dropdown background */
+        }
+
+        .dropdown-item {
+            white-space: normal;
+            padding: 10px;
+            color: #ffffff; /* Light text color */
+        }
+
+        .dropdown-item:hover {
+            background-color: #3a3a3a; /* Slightly lighter background on hover */
+        }
+        .uni {
+            color: #fff200;
+            animation: animate 1s ease-in-out infinite alternate;
+        }
+        @keyframes animate{
+            from{
+                text-shadow: 0 0 20px #fff200;
+            }
+            to{
+                text-shadow: 0 0 30px  #fff200, 0 0 10px #FF8C00;
+            }
+        }
+
+
+        /* Quill editor */
+        .ql-toolbar {
+            background-color: #1f1f1f;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .ql-container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/"> <span class="uni">Uni</span>Connect</a>
+        <div class="d-flex align-items-center">
+            <div class="profile-section mr-3">
+                <div class="profile-avatar">{{ user.name[0] | upper }}</div>
+                {{ user.name }}
+            </div>
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="notification-icon">
+                        <i class="far fa-bell"></i>
+                        <span id="notificationCount" class="notification-badge">0</span>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    id="notificationsDropdown">
+                    <!-- Notifications will be inserted here dynamically -->
+                </div>
+            </div>
+            <button class="btn btn-outline-light ml-2" type="button" onclick="window.location.href='/logout';"><b>Log Out</b></button>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <aside class="col-lg-4 mb-4">
+                <div class="card create-post">
+                    <div class="card-header">
+                        Create Post
+                    </div>
+                    <div class="card-body">
+                        <form id="postForm" method="POST" action="/create_post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Title" required>
+                            </div>
+                            <div class="form-group">
+                                <div id="editor" style="height: 200px;"></div>
+                                <input type="hidden" name="content" id="content" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Post</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </aside>
+            <main class="col-lg-8 mb-4" id="postsContainer">
+                <!-- Posts will be inserted here dynamically using JavaScript -->
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var quill = new Quill('#editor', {
+                theme: 'snow',
+                placeholder: 'Write something amazing...',
+                modules: {
+                    toolbar: [
+                        [{ 'font': [] }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        ['bold', 'italic', 'underline'],
+                        ['image', 'link'],
+                        ['video'],
+                        [{ 'align': [] }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            var form = document.getElementById('postForm');
+            form.onsubmit = function () {
+                var editorContent = document.querySelector('input[name=content]');
+                editorContent.value = quill.root.innerHTML;
+                return true;
+            };
+
+            const notificationCount = document.getElementById('notificationCount');
+            const notificationsMenu = document.getElementById('notificationsDropdown');
+
+            function updateNotifications() {
+                fetch('/notifications')
+                    .then(response => response.json())
+                    .then(data => {
+                        notificationsMenu.innerHTML = '';
+                        if (data.error) {
+                            notificationsMenu.innerHTML = `<span class="dropdown-item">${data.error}</span>`;
+                        } else {
+                            data.forEach(notification => {
+                                notificationsMenu.innerHTML += `
+                                    <a class="dropdown-item" href="/post/${notification.post_id}">
+                                        ${notification.message} - ${notification.timestamp}
+                                    </a>
+                                `;
+                            });
+                            notificationCount.textContent = data.length;
+                        }
+                    })
+                    .catch(error => console.error('Error fetching notifications:', error));
+            }
+
+            updateNotifications();
+
+            fetch('/get_posts')
+                .then(response => response.json())
+                .then(posts => {
+                    const postsContainer = document.getElementById('postsContainer');
+                    postsContainer.innerHTML = '';
+                    posts.forEach(post => {
+                        const postCard = document.createElement('a');
+                        postCard.href = `/post/${post.id}`;
+                        postCard.className = 'tweet-card';
+                        postCard.innerHTML = `
+                            <div class="tweet-avatar">
+                                ${post.username.charAt(0).toUpperCase()}
+                            </div>
+                            <div class="tweet-content">
+                                <div class="tweet-header">
+                                    <span class="tweet-username">${post.username}</span>
+                                    <span class="tweet-handle">@${post.user_id}</span>
+                                    <span class="tweet-timestamp">${post.timestamp}</span>
+                                </div>
+                                <div class="tweet-title">${post.title}</div>
+                                <div class="tweet-body">${highlightTags(post.content)}</div>
+                                ${post.image ? `<img src="${post.image}" alt="Post Image" class="img-fluid mt-2">` : ''}
+                                <span class="comment-icon">💬</span>
+                            </div>
+                        `;
+                        postsContainer.appendChild(postCard);
+                    });
+                });
+        });
+
+        function highlightTags(content) {
+            return content.replace(/@(\w+)/g, '<span class="tweet-tag">@$1</span>');
+        }
+    </script>
+
+    <script>
+        (function (w, d, s, o, f, js, fjs) {
+          w["botsonic_widget"] = o;
+          w[o] =
+            w[o] ||
+            function () {
+              (w[o].q = w[o].q || []).push(arguments);
+            };
+          (js = d.createElement(s)), (fjs = d.getElementsByTagName(s)[0]);
+          js.id = o;
+          js.src = f;
+          js.async = 1;
+          fjs.parentNode.insertBefore(js, fjs);
+        })(window, document, "script", "Botsonic", "https://widget.writesonic.com/CDN/botsonic.min.js");
+        Botsonic("init", {
+          serviceBaseUrl: "https://api-azure.botsonic.ai",
+          token: "46315dfa-4152-49bf-9895-383256eb76cb",
+        });
+      </script>
+</body>
+
+</html>

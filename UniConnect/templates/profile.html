@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile - UniConnect</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #121212; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .uni {
+            color: #fff200;
+            animation: animate 1s ease-in-out infinite alternate;
+        }
+        @keyframes animate{
+            from{
+                text-shadow: 0 0 20px #fff200;
+            }
+            to{
+                text-shadow: 0 0 30px  #fff200, 0 0 10px #FF8C00;
+            }
+        }
+
+        .hero{
+            font-size: 8em;
+        }
+        .curve::after{
+            content:'';
+            border-top-left-radius: 50% 100%;
+            border-top-right-radius: 50% 100%;
+            position: absolute;
+            bottom: 0;
+            height: 85%;
+            width: 100%;
+            background-color: #0f0f10;
+            z-index: -1;
+        }
+        .btn {
+            border: none;
+            width: 15em;
+            height: 4em;
+            border-radius: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            background: #1C1A1C;
+            cursor: pointer;
+            transition: all 450ms ease-in-out;
+        }
+        
+        .sparkle {
+            fill: white;
+            transition: all 800ms ease;
+        }
+        
+        .text {
+            font-weight: 600;
+            color: white;
+            font-size: medium;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(0deg, #FFD700, #FFA500); /* Yellow and orange gradient */
+            box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+                        inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+                        0px 0px 0px 4px rgba(255, 255, 255, 0.2),
+                        0px 0px 180px 0px #FF8C00; /* Darker orange glow */
+            transform: translateY(-2px);
+        }
+        
+        
+        .btn:hover .text {
+            color: white;
+        }
+        
+        .btn:hover .sparkle {
+            fill: white;
+            transform: scale(1.2);
+        } 
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+          }
+          
+          .button {
+            cursor: pointer;
+            text-decoration: none;
+            color: #ffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #2d2e32;
+            border: 2px solid #2d2e32;
+            transition: all 0.45s;
+          }
+          
+          .button:hover {
+            transform: rotate(360deg);
+            transform-origin: center center;
+            background-color: #ffff;
+            color: blue;
+          }
+          
+          .button:hover .btn-svg {
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg)
+              brightness(103%) contrast(103%);
+          }
+          
+          .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+        .navbar {
+            padding: 1rem 2rem;
+            background: rgba(30, 30, 30, 0.9); /* Darker background with slight opacity */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            color: white;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 0 0 10px 10px; /* Rounded corners */
+        }
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+  
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #ff4500;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            text-decoration: none; /* Remove default underline */
+            color: inherit; /* Inherit text color */
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .profile-avatar:hover {
+            opacity: 0.8; /* Optional: Reduce opacity on hover for better visual feedback */
+        }
+
+        .form-control {
+            border-radius: 10px;
+            background-color: #1e1e1e; /* Dark background for input */
+            color: #ffffff; /* Light text color */
+            border: 1px solid #333333; /* Dark border */
+        }
+
+        .form-control::placeholder {
+            color: #888888; /* Light placeholder text */
+        }
+
+        .btn-primary {
+            background-color: blue;
+            border: none;
+            border-radius: 10px;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .btn-outline-light {
+            border-radius: 10px;
+            padding: 0.5rem 1.5rem;
+            border-color: #ffffff; /* Light border color */
+            color: #ffffff; /* Light text color */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            margin-bottom: 30px;
+            background-color: #1f1f1f; /* Dark card background */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+        }
+
+        .card-header {
+            border-bottom: none;
+            background-color: #2c2c2c; /* Slightly lighter background for card header */
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .create-post .card-header,
+        .subreddits .card-header {
+            background-color: light-blue; /* Highlight color */
+        }
+
+        .create-post form input,
+        .create-post form select {
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #333333; /* Darker border */
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .create-post form button {
+            padding: 15px;
+            background-color: #ff4500;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .subreddits ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .subreddits ul li {
+            margin-bottom: 15px;
+        }
+
+        .subreddits ul li a {
+            text-decoration: none;
+            color: #ff4500; /* Highlight color */
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .subreddits ul li a:hover {
+            color: #ff7300; /* Darker highlight on hover */
+        }
+
+        .post-content h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffffff; /* Light text color */
+        }
+
+        .post-content p {
+            margin: 10px 0;
+            color: #bbbbbb; /* Light gray text color */
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .tweet-card {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid #333333; /* Dark border */
+            border-radius: 15px;
+            background-color: #2c2c2c; /* Dark background */
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            cursor: pointer;
+        }
+
+        .tweet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
+        }
+
+        .tweet-avatar {
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #1da1f2; /* Tweet avatar background */
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .tweet-content {
+            flex: 1;
+        }
+
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .tweet-username {
+            font-weight: bold;
+            margin-right: 5px;
+            color: #ffffff; /* Light text color */
+        }
+
+        .tweet-handle {
+            color: #1da1f2; /* Link color */
+        }
+
+        .tweet-timestamp {
+            color: #888888; /* Light gray text color */
+            margin-left: 5px;
+        }
+
+        .tweet-body {
+            color: #ffffff; /* Light text color */
+        }
+
+        .tweet-body .tweet-tag {
+            color: #1da1f2; /* Tag color */
+        }
+
+        .tweet-title {
+            font-weight: bold;
+            color: #ffffff; /* Light text color */
+            margin-bottom: 5px;
+        }
+
+        .tweet-card img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .comment-icon {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .notification-icon {
+            width: 24px;
+            height: 24px;
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+
+        .dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+            background-color: #2c2c2c; /* Dark dropdown background */
+        }
+
+        .dropdown-item {
+            white-space: normal;
+            padding: 10px;
+            color: #ffffff; /* Light text color */
+        }
+
+        .dropdown-item:hover {
+            background-color: #3a3a3a; /* Slightly lighter background on hover */
+        }
+        .uni {
+            color: #fff200;
+            animation: animate 1s ease-in-out infinite alternate;
+        }
+        @keyframes animate{
+            from{
+                text-shadow: 0 0 20px #fff200;
+            }
+            to{
+                text-shadow: 0 0 30px  #fff200, 0 0 10px #FF8C00;
+            }
+        }
+
+
+        /* Quill editor */
+        .ql-toolbar {
+            background-color: #1f1f1f;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .ql-container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar-brand span {
+            color: #fddb3a;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .profile-section .profile-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #ff4500;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+
+
+        .post-card {
+            position: relative; /* Ensure relative positioning for absolute delete button */
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            background-color: black;
+            margin-bottom: 20px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #1da1f2;
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .post-content {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .post-title {
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .post-body {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .post-body .post-tag {
+            color: #1da1f2;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 10px; /* Add margin top for spacing */
+        }
+
+        .post-footer span {
+            white-space: nowrap;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .profile-link {
+            color: white; /* Text color for the link */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        .profile-link:hover {
+            color: #fddb3a; /* Change color on hover */
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: block; /* Ensure images behave as block elements */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/"> <span class="uni">Uni</span>Connect</a>
+        <div class="d-flex align-items-center">
+            <div class="profile-section mr-3">
+                <div class="profile-avatar">{{ user.name[0] | upper }}</div>
+                {{ user.name }}
+            </div>
+            <div class="dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="notification-icon">
+                        <i class="far fa-bell"></i>
+                        <span id="notificationCount" class="notification-badge">0</span>
+                    </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"
+                    id="notificationsDropdown">
+                    <!-- Notifications will be inserted here dynamically -->
+                </div>
+            </div>
+            <button class="btn btn-outline-light ml-2" type="button" onclick="window.location.href='/logout';"><b>Log Out</b></button>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <aside class="col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        Your Profile
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> {{ user.name }}</p>
+                        <p><strong>USN:</strong> {{ user.usn }}</p>
+                    </div>
+                </div>
+            </aside>
+            <main class="col-lg-9 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        Your Posts
+                    </div>
+                    <div class="card-body">
+                        {% if posts %}
+                            {% for post in posts %}
+                                <div class="post-card">
+                                    <div class="post-avatar">{{ post.user_name[0] | upper }}</div>
+                                    <div class="post-content">
+                                        <div class="post-title">{{ post.title }}</div>
+                                        <div class="post-body">{{ post.content | safe }}</div>
+                                        <div class="post-footer">
+                                            <span>{{ post.humanized_time }}</span>
+                                            <!-- Delete Button -->
+                                            <button class="btn btn-danger" onclick="deletePost('{{ post.id }}')">Delete 🗑</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p>No posts to display.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function deletePost(postId) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                // Perform AJAX request to delete the post with postId
+                fetch(`/delete-post/${postId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Reload the page after successful deletion
+                        location.reload();
+                    } else {
+                        throw new Error('Failed to delete post.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting post:', error);
+                    // Handle error (e.g., show an alert)
+                    alert('Failed to delete post. Please try again later.');
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
