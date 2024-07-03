@@ -1,4 +1,0 @@
-Flask==2.0.3
-Flask-SQLAlchemy==2.5.1
-bcrypt==3.2.0
-humanize==3.12.0
