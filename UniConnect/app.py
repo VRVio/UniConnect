@@ -251,4 +251,4 @@ def notifications():
 
     return jsonify(notification_list)
 
-app.run(debug=True)
+app.run(debug=False,host='0.0.0.0')
