@@ -58,5 +58,5 @@ UniConnect is built on a solid foundation using the following technologies:
 ## Contributers
 ## Contributors
 
-- [Contributor Name](https://github.com/SIDDHARTH-PADIGAR) - Contributed Majorly to the frontend and database schema
+- [Siddharth R Padigar](https://github.com/SIDDHARTH-PADIGAR) - Contributed Majorly to the frontend and database schema
 
