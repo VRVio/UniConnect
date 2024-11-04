@@ -55,3 +55,8 @@ UniConnect is built on a solid foundation using the following technologies:
 - **HTML/CSS**: For building a clean and responsive user interface
 
 ---
+## Contributers
+## Contributors
+
+- [Contributor Name](https://github.com/SIDDHARTH-PADIGAR) - Contributed Majorly to the frontend and database schema
+
